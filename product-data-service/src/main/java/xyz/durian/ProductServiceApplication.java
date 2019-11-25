@@ -28,39 +28,51 @@ public class ProductServiceApplication
 {
     //Sampler 抽样策略： ALWAYS_SAMPLE 表示持续抽样
     @Bean
-    public Sampler defaultSampler() {
+    public Sampler defaultSampler()
+    {
         return Sampler.ALWAYS_SAMPLE;
     }
 
     public static void main(String[] args)
     {
+        //判断 rabbitMQ 是否启动
+        int rabbitMQPort = 5672;
+        if(NetUtil.isUsableLocalPort(rabbitMQPort)) {
+            System.err.printf("未在端口%d 发现 rabbitMQ服务，请检查rabbitMQ 是否启动", rabbitMQPort );
+            System.exit(1);
+        }
         int port;
         int defaultPort = 8001;
-        Future<Integer> future = ThreadUtil.execAsync(() ->{
+        Future<Integer> future = ThreadUtil.execAsync(() ->
+        {
             int p;
             System.out.println("请于5秒钟内输入端口号, 推荐  8001 、 8002  或者  8003，超过5秒将默认使用 " + defaultPort);
             @Cleanup Scanner scanner = new Scanner(System.in);
-            while(true) {
+            while (true)
+            {
                 String strPort = scanner.nextLine();
-                if(!NumberUtil.isInteger(strPort)) {
+                if (!NumberUtil.isInteger(strPort))
+                {
                     System.err.println("只能是数字");
-                }
-                else {
+                } else
+                {
                     p = Convert.toInt(strPort);
                     break;
                 }
             }
             return p;
         });
-        try{
-            port=future.get(5, TimeUnit.SECONDS);
-        }
-        catch (InterruptedException | ExecutionException | TimeoutException e){
+        try
+        {
+            port = future.get(5, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e)
+        {
             port = defaultPort;
         }
 
-        if(!NetUtil.isUsableLocalPort(port)) {
-            System.err.printf("端口%d被占用了，无法启动%n", port );
+        if (!NetUtil.isUsableLocalPort(port))
+        {
+            System.err.printf("端口%d被占用了，无法启动%n", port);
             System.exit(1);
         }
         new SpringApplicationBuilder(ProductServiceApplication.class).properties("server.port=" + port).run(args);
