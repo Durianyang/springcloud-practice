@@ -22,6 +22,9 @@ public class ProductController
 {
     @Value("${version}")
     String version;
+    @Value("${content{")
+    String content;
+
     private final ProductService productService;
     @Autowired
     public ProductController(ProductService productService)
@@ -35,6 +38,7 @@ public class ProductController
         List<Product> productList = productService.productList();
         model.addAttribute("productList", productList);
         model.addAttribute("version", version);
+        model.addAttribute("content", content);
         return "productList";
 
     }

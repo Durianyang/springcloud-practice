@@ -8,9 +8,9 @@ spring:
       server:
         git:
           # uri git地址
-          uri: https://github.com/how2j/springcloudConfig/
+          uri: https://github.com/Durianyang/springcloud-practice
           # searchPaths 表示目录
-          searchPaths: respo
+          searchPaths: repos
 eureka:
   client:
     serviceUrl:
