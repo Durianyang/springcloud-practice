@@ -7,6 +7,7 @@ import cn.hutool.core.util.NetUtil;
 import cn.hutool.core.util.NumberUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeoutException;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
+@EnableCircuitBreaker//使得它可以把信息共享给监控中心
 public class ProductViewServiceFeignApplication
 {
     //Sampler 抽样策略： ALWAYS_SAMPLE 表示持续抽样
