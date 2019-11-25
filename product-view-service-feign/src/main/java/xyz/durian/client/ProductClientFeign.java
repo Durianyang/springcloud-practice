@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 2019/11/22 18:03
  * Description:
  */
-@FeignClient(value = "PRODUCT-DATA-SERVICE")
+@FeignClient(value = "PRODUCT-DATA-SERVICE",fallback = ProductClientFeignHystrix.class)
 public interface ProductClientFeign
 {
     @GetMapping("/productList")
