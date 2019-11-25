@@ -22,7 +22,7 @@ public class ProductController
 {
     @Value("${version}")
     String version;
-    @Value("${content{")
+    @Value("${content}")
     String content;
 
     private final ProductService productService;
