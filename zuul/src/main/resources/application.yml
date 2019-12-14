@@ -8,3 +8,8 @@ zuul:
     api-b:
       path: /api-view/**
       serviceId: PRODUCT-VIEW-SERVICE-FEIGN
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://47.93.11.144:8761/eureka/

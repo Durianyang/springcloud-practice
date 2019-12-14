@@ -4,15 +4,17 @@ spring:
       label: master
       profile: pro
       discovery:
-        enabled:  true
-        serviceId:  config-server
+        enabled: true
+        serviceId: config-server
         bus:
           enabled: true
           trace:
             enabled: true
+
+eureka:
   client:
     serviceUrl:
-      defaultZone:  http://localhost:8761/eureka/
+      defaultZone: http://47.93.11.144:8761/eureka/
 
   rabbitmq:
     host: localhost
